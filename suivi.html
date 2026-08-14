@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suivre une demande — Portail des actes académiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand__crest">UP</span>
+      <span class="brand__text"><strong>Portail des Actes</strong><span>Faculté — Université de Parakou</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰ Menu</button>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="nouvelle-demande.html">Nouvelle demande</a>
+      <a href="suivi.html" class="active">Suivre une demande</a>
+      <a href="connexion.html">Espace étudiant</a>
+      <a href="back-office.html">Espace agent</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="container">
+    <span class="eyebrow">Suivi de dossier</span>
+    <h1>Où en est ma demande ?</h1>
+    <p>Saisissez le code de suivi reçu par email ou SMS lors du dépôt de votre demande.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container track-box">
+
+    <form id="track-form">
+      <div class="field">
+        <label for="track-code">Code de suivi</label>
+        <div class="track-input-row">
+          <input type="text" id="track-code" placeholder="FAC-2026-000452" autocomplete="off" required>
+          <button type="submit" class="btn btn-primary">Suivre</button>
+        </div>
+        <p class="hint">Le code se présente sous la forme FAC-2026-XXXXXX.</p>
+      </div>
+    </form>
+
+    <div class="alert alert-error" id="track-error" hidden></div>
+
+    <div id="track-result" hidden></div>
+
+    <div class="empty mt-48">
+      <p style="margin-bottom:6px;"><strong>Pas encore de demande en cours ?</strong></p>
+      <p class="small" style="margin-bottom:16px;">Vous pouvez déposer une demande en quelques minutes.</p>
+      <a href="nouvelle-demande.html" class="btn btn-dark btn-sm">Faire une nouvelle demande</a>
+    </div>
+
+    <div class="alert alert-info mt-32">
+      <div>
+        <strong>Pour tester cette démonstration</strong>, essayez l'un de ces codes :
+        <div class="small" style="font-family:var(--font-mono);margin-top:6px;line-height:1.9;">
+          FAC-2026-000452 (en traitement) · FAC-2026-000398 (prête) ·
+          FAC-2026-000411 (rejetée) · FAC-2026-000377 (retirée)
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Faculté — Université de Parakou</span>
+      <span>Plateforme de démonstration — projet de dématérialisation</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

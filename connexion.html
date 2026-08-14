@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace étudiant — Portail des actes académiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand__crest">UP</span>
+      <span class="brand__text"><strong>Portail des Actes</strong><span>Faculté — Université de Parakou</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰ Menu</button>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="nouvelle-demande.html">Nouvelle demande</a>
+      <a href="suivi.html">Suivre une demande</a>
+      <a href="connexion.html" class="active">Espace étudiant</a>
+      <a href="back-office.html">Espace agent</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="container">
+    <span class="eyebrow">Espace étudiant</span>
+    <h1>Connexion</h1>
+    <p>Retrouvez l'historique de toutes vos demandes en un seul endroit. La connexion reste facultative : le suivi par code fonctionne sans compte.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container auth-wrap">
+
+    <div class="auth-tabs">
+      <button type="button" class="active" data-tab="password">Matricule + mot de passe</button>
+      <button type="button" data-tab="magic">Lien par email</button>
+    </div>
+
+    <div class="form-card">
+
+      <div class="auth-panel" data-panel="password">
+        <form id="login-form">
+          <div class="field">
+            <label for="login-matricule">Matricule</label>
+            <input type="text" id="login-matricule" required placeholder="Ex. 20211045">
+          </div>
+          <div class="field">
+            <label for="login-pass">Mot de passe</label>
+            <input type="password" id="login-pass" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+          <p class="small center mt-32"><a href="#">Mot de passe oublié ?</a></p>
+        </form>
+      </div>
+
+      <div class="auth-panel" data-panel="magic" hidden>
+        <form id="magic-form">
+          <div class="field">
+            <label for="magic-email">Adresse email institutionnelle</label>
+            <input type="email" id="magic-email" required placeholder="vous@etu.uparakou.bj">
+            <p class="hint">Nous vous enverrons un lien de connexion valable 15 minutes, sans mot de passe à retenir.</p>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Recevoir le lien de connexion</button>
+        </form>
+        <div class="alert alert-success mt-32" id="magic-confirm" hidden>
+          Un lien de connexion vient d'être envoyé à votre adresse email (démonstration).
+        </div>
+      </div>
+
+    </div>
+
+    <p class="small center mt-32">Pas encore de compte activé ? Le compte est créé automatiquement lors de votre première demande.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Faculté — Université de Parakou</span>
+      <span>Plateforme de démonstration — projet de dématérialisation</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

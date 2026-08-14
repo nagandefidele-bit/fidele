@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon espace — Portail des actes académiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand__crest">UP</span>
+      <span class="brand__text"><strong>Portail des Actes</strong><span>Faculté — Université de Parakou</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰ Menu</button>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="nouvelle-demande.html">Nouvelle demande</a>
+      <a href="suivi.html">Suivre une demande</a>
+      <a href="connexion.html">Espace étudiant</a>
+      <a href="back-office.html">Espace agent</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="container">
+    <span class="eyebrow">Mon espace</span>
+    <h1>Bonjour, Damien.</h1>
+    <p>Voici l'historique de toutes vos demandes d'actes académiques.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container dash-grid">
+
+    <aside class="dash-side">
+      <div class="who">
+        <div class="avatar">DK</div>
+        <div>
+          <strong style="display:block;">Damien K.</strong>
+          <span class="small">Matricule 20211045</span>
+        </div>
+      </div>
+      <ul class="dash-nav">
+        <li><a href="tableau-bord.html" class="active">Mes demandes</a></li>
+        <li><a href="nouvelle-demande.html">Nouvelle demande</a></li>
+        <li><a href="#">Mon profil</a></li>
+        <li><a href="index.html">Se déconnecter</a></li>
+      </ul>
+    </aside>
+
+    <div>
+      <div class="flex-between mt-32" style="margin-top:0;margin-bottom:20px;">
+        <h3 style="margin:0;">Mes demandes</h3>
+        <a href="nouvelle-demande.html" class="btn btn-primary btn-sm">+ Nouvelle demande</a>
+      </div>
+      <div class="dash-list" id="dash-list"></div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Faculté — Université de Parakou</span>
+      <span>Plateforme de démonstration — projet de dématérialisation</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

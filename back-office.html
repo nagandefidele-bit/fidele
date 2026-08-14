@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace agent — Portail des actes académiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand__crest">UP</span>
+      <span class="brand__text"><strong>Portail des Actes</strong><span>Faculté — Université de Parakou</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰ Menu</button>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="nouvelle-demande.html">Nouvelle demande</a>
+      <a href="suivi.html">Suivre une demande</a>
+      <a href="connexion.html">Espace étudiant</a>
+      <a href="back-office.html" class="active">Espace agent</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="container">
+    <span class="eyebrow">Back-office — Service de la scolarité</span>
+    <h1>Demandes reçues</h1>
+    <p>Traitez les dossiers, mettez à jour leur statut et suivez la charge de travail du service.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="n" id="stat-total">0</div><div class="l">Total demandes</div></div>
+      <div class="stat-card"><div class="n" id="stat-recue">0</div><div class="l">À traiter</div></div>
+      <div class="stat-card"><div class="n" id="stat-prete">0</div><div class="l">Prêtes</div></div>
+      <div class="stat-card"><div class="n" id="stat-rejetee">0</div><div class="l">Rejetées</div></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="filters">
+        <input type="text" id="bo-search" placeholder="Rechercher (code, nom, matricule)…" style="min-width:240px;">
+        <select id="bo-filter-type">
+          <option value="">Tous les actes</option>
+          <option value="releve">Relevé de notes</option>
+          <option value="attestation">Attestation</option>
+          <option value="duplicata">Diplôme / Duplicata</option>
+          <option value="scolarite">Certificat de scolarité</option>
+        </select>
+        <select id="bo-filter-statut">
+          <option value="">Tous les statuts</option>
+          <option value="recue">Reçue</option>
+          <option value="en_traitement">En traitement</option>
+          <option value="prete">Prête</option>
+          <option value="rejetee">Rejetée</option>
+          <option value="retiree">Retirée</option>
+        </select>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="alert('Démonstration : cette action exporterait la liste filtrée au format CSV.')">Exporter en CSV</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Code de suivi</th>
+            <th>Étudiant</th>
+            <th>Type d'acte</th>
+            <th>Statut</th>
+            <th>Reçue le</th>
+            <th>Mettre à jour</th>
+          </tr>
+        </thead>
+        <tbody id="bo-tbody"></tbody>
+      </table>
+    </div>
+
+    <p class="small mt-32">Modifier le statut d'un dossier déclenche automatiquement une notification à l'étudiant (email/SMS) en production.</p>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Faculté — Université de Parakou</span>
+      <span>Plateforme de démonstration — projet de dématérialisation</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
