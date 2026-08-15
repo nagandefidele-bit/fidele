@@ -1,194 +1,346 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portail Académique - Gestion des Actes</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guichet des actes académiques — Université de Parakou</title>
+  <meta name="description" content="Demandez et suivez vos actes académiques (relevés, attestations, diplômes, certificats) entièrement en ligne, sans file d'attente.">
+  <meta name="theme-color" content="#14213a">
+  <!-- Préconnexions polices + chargement diferé -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;0,9..144,750;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%2314213a'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='%23c99b3f' stroke-width='3'/%3E%3Cpath d='M32 18l3.6 8.2 9 .9-6.8 6 1.9 8.8L32 37.3l-7.7 4.6 1.9-8.8-6.8-6 9-.9z' fill='%23c99b3f'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <script src="js/app.js" defer></script>
+  <script src="js/motion.js" defer></script>
 </head>
-<body>
+<body data-page="accueil">
 
-    <!-- Arrière-plan dynamique (Canvas) -->
-    <canvas id="bg-canvas"></canvas>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+  <div class="sentinelle" aria-hidden="true"></div>
 
-    <!-- En-tête / Navigation -->
-    <header>
-        <div class="logo">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span>UniActes<small>.bj</small></span>
+  <!-- Liseré tricolore -->
+  <div class="flag" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <!-- En-tête officiel -->
+  <header class="masthead">
+    <div class="wrap masthead__micro">
+      <span>République du Bénin · Ministère de l'Enseignement Supérieur</span>
+      <span class="masthead__micro-r">Année universitaire 2025–2026</span>
+    </div>
+    <div class="wrap masthead__bar">
+      <a class="brand" href="index.html">
+        <svg class="sceau" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="22.5" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"/>
+          <path d="M32 15l4.4 9.9 10.8 1.1-8.1 7.2 2.3 10.6L32 38.3l-9.4 5.5 2.3-10.6-8.1-7.2 10.8-1.1z" fill="currentColor"/>
+        </svg>
+        <span class="brand__txt">
+          <strong>Université de Parakou</strong>
+          <small>Guichet numérique des actes académiques</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Navigation principale">
+        <input type="checkbox" id="nav-toggle" class="nav__check">
+        <label for="nav-toggle" class="nav__burger">Menu</label>
+        <ul class="nav__list">
+          <li><a href="index.html" class="is-here" aria-current="page">Accueil</a></li>
+          <li><a href="nouvelle-demande.html">Nouvelle demande</a></li>
+          <li><a href="suivi.html">Suivi</a></li>
+          <li><a href="connexion.html">Connexion</a></li>
+          <li><a href="tableau-bord.html">Tableau de bord</a></li>
+          <li><a href="back-office.html">Back-office</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu">
+
+    <!-- Bandeau d'ouverture : registre + talon spécimen -->
+    <section class="hero">
+      <svg class="hero__sceau" viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="100" cy="100" r="72" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 5"/>
+        <path d="M100 38l14 31 34 3.5-25.5 22.8 7.3 33.5L100 111l-29.8 17.8 7.3-33.5L52 72.5l34-3.5z" fill="currentColor"/>
+      </svg>
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="overline" data-reveal>Guichet numérique · Université de Parakou</p>
+          <h1 data-reveal>Vos actes académiques,<br><em>délivrés en ligne</em>, sans file d'attente.</h1>
+          <p class="lead" data-reveal>Relevés de notes, attestations de réussite, diplômes et certificats&nbsp;: déposez votre demande, suivez chaque étape grâce à un code unique, récupérez votre acte signé. Aucune présence physique n'est requise.</p>
+
+          <!-- Suivi express, natif (GET vers suivi.html) -->
+          <form class="hero__track" data-reveal action="suivi.html" method="get">
+            <label class="visually-hidden" for="hero-code">Code de suivi</label>
+            <input class="input input--code" id="hero-code" name="code" placeholder="UP-2026-…-0000" autocomplete="off" spellcheck="false">
+            <button class="btn btn--ink" type="submit"><span class="btn__label">Suivre</span></button>
+          </form>
+
+          <div class="hero__cta" data-reveal>
+            <a class="btn btn--gold btn--lg" href="nouvelle-demande.html" data-magnetic><span class="btn__label">Déposer une demande</span></a>
+            <a class="btn btn--ghost" href="#fonctionnement">Comprendre le service</a>
+          </div>
+          <p class="hero__note" data-reveal>Sans compte obligatoire · code de suivi confidentiel · chaque étape est horodatée.</p>
         </div>
-        <nav>
-            <a href="#accueil" class="nav-link active">Accueil</a>
-            <a href="#suivi" class="nav-link">Suivi Rapide</a>
-            <a href="#connexion" class="nav-link btn-login">Espace Étudiant</a>
-        </nav>
-    </header>
 
-    <!-- Contenu Principal -->
-    <main>
-        <!-- Section Accueil / Hero -->
-        <section id="accueil" class="section active-section">
-            <div class="hero-content">
-                <h1>Simplifiez vos démarches académiques</h1>
-                <p>Soumettez vos demandes d'actes en ligne, suivez l'évolution en temps réel et récupérez vos documents sécurisés sans vous déplacer.</p>
-                <div class="hero-actions">
-                    <button class="btn primary" onclick="switchSection('connexion')">Déposer une demande <i class="fa-solid fa-arrow-right"></i></button>
-                    <button class="btn secondary" onclick="switchSection('suivi')">Suivre un dossier</button>
-                </div>
+        <!-- Talon spécimen perforé -->
+        <div class="hero__side" data-reveal>
+          <div class="rotor" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 6"/>
+              <circle cx="60" cy="60" r="34" fill="none" stroke="currentColor" stroke-width="1"/>
+              <path d="M60 30l7 15.5 17 1.8-12.7 11.4 3.6 16.8L60 67.6l-14.9 7.9 3.6-16.8L36 47.3l17-1.8z" fill="currentColor"/>
+              <text x="60" y="108" text-anchor="middle" font-size="8" letter-spacing="2">U · P · 2026</text>
+            </svg>
+          </div>
+          <article class="talon" data-tilt>
+            <div class="talon__body">
+              <p class="talon__meta">Université de Parakou · Scolarité</p>
+              <strong class="talon__titre">Relevé de notes — Spécimen</strong>
+              <dl class="talon__dl">
+                <div><dt>Étudiant·e</dt><dd>Prénom Nom</dd></div>
+                <div><dt>Statut</dt><dd class="st-dis">Disponible</dd></div>
+              </dl>
             </div>
-            
-            <div class="stats-container">
-                <div class="stat-card">
-                    <i class="fa-solid fa-file-circle-check"></i>
-                    <h3>+15 000</h3>
-                    <p>Actes délivrés</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fa-solid fa-clock"></i>
-                    <h3>48h</h3>
-                    <p>Délai moyen</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fa-solid fa-face-smile"></i>
-                    <h3>100%</h3>
-                    <p>Dématérialisé</p>
-                </div>
+            <div class="talon__perf" aria-hidden="true"></div>
+            <div class="talon__stub">
+              <span class="talon__meta">Code de suivi</span>
+              <strong class="talon__code">UP-2026-SPEC-0001</strong>
+              <div class="talon__bars" aria-hidden="true"></div>
+              <span class="talon__meta talon__meta--tiny">Conservez précieusement ce code</span>
             </div>
-        </section>
-
-        <!-- Section Suivi Rapide (Anonyme) -->
-        <section id="suivi" class="section">
-            <div class="card-form">
-                <h2><i class="fa-solid fa-magnifying-glass"></i> Suivi d'un dossier en ligne</h2>
-                <p>Entrez votre code de suivi unique (ex: <code>PARAKOU-2026-A8F2</code>) pour consulter l'état d'avancement.</p>
-                
-                <div class="input-group">
-                    <input type="text" id="tracking-input" placeholder="Ex: PARAKOU-2026-XXXX">
-                    <button class="btn primary" onclick="rechercherDossier()">Vérifier</button>
-                </div>
-
-                <!-- Résultat du suivi (Dynamique) -->
-                <div id="tracking-result" class="hidden">
-                    <div class="timeline">
-                        <div class="step completed">
-                            <div class="step-icon"><i class="fa-solid fa-check"></i></div>
-                            <div class="step-text">
-                                <h4>Soumis</h4>
-                                <small>Dossier reçu le 12/08/2026</small>
-                            </div>
-                        </div>
-                        <div class="step active">
-                            <div class="step-icon"><i class="fa-solid fa-spinner fa-spin"></i></div>
-                            <div class="step-text">
-                                <h4>En cours de vérification</h4>
-                                <small>Traitement par la scolarité</small>
-                            </div>
-                        </div>
-                        <div class="step">
-                            <div class="step-icon"><i class="fa-solid fa-signature"></i></div>
-                            <div class="step-text">
-                                <h4>Validé / Signé</h4>
-                                <small>En attente de signature du décanat</small>
-                            </div>
-                        </div>
-                        <div class="step">
-                            <div class="step-icon"><i class="fa-solid fa-download"></i></div>
-                            <div class="step-text">
-                                <h4>Prêt</h4>
-                                <small>Disponible au téléchargement</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Connexion / Espace Étudiant -->
-        <section id="connexion" class="section">
-            <div class="card-form auth-card">
-                <h2><i class="fa-solid fa-lock"></i> Espace Sécurisé</h2>
-                <p>Connectez-vous avec votre numéro de matricule</p>
-
-                <form id="login-form" onsubmit="connecterEtudiant(event)">
-                    <div class="form-control">
-                        <label>Numéro de Matricule</label>
-                        <input type="text" id="matricule" placeholder="Ex: 2023-B-4589" required>
-                    </div>
-                    <div class="form-control">
-                        <label>Mot de passe</label>
-                        <input type="password" id="password" placeholder="••••••••" required>
-                    </div>
-                    <button type="submit" class="btn primary full-width">Se connecter</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Tableau de bord Étudiant (Masqué par défaut) -->
-        <section id="dashboard" class="section">
-            <div class="dashboard-container">
-                <div class="dashboard-header">
-                    <h2>Bienvenue, <span id="user-name">Étudiant</span></h2>
-                    <button class="btn secondary" onclick="deconnecter()"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</button>
-                </div>
-
-                <div class="dashboard-actions">
-                    <button class="btn primary" onclick="ouvrirModalDemande()"><i class="fa-solid fa-plus"></i> Nouvelle Demande</button>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="custom-table">
-                        <thead>
-                            <tr>
-                                <th>Code Suivi</th>
-                                <th>Type d'Acte</th>
-                                <th>Date</th>
-                                <th>Statut</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="demandes-list">
-                            <!-- Injecté par JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Modal Nouvelle Demande -->
-    <div id="modal-demande" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="fermerModalDemande()">&times;</span>
-            <h3>Soumettre une nouvelle demande</h3>
-            <form id="new-demande-form" onsubmit="soumettreDemande(event)">
-                <div class="form-control">
-                    <label>Type d'Acte</label>
-                    <select id="type-acte" required>
-                        <option value="">Sélectionner un acte</option>
-                        <option value="Certificat de scolarité">Certificat de scolarité</option>
-                        <option value="Relevé de notes">Relevé de notes</option>
-                        <option value="Attestation de réussite">Attestation de réussite</option>
-                    </select>
-                </div>
-                <div class="form-control">
-                    <label>Année Académique</label>
-                    <input type="text" value="2025-2026" readonly>
-                </div>
-                <div class="form-control">
-                    <label>Motif / Précisions</label>
-                    <textarea id="motif" rows="3" placeholder="Précisez votre département ou besoin..."></textarea>
-                </div>
-                <div class="form-control">
-                    <label>Pièce justificative (PDF ou Image)</label>
-                    <input type="file" id="piece-jointe" accept=".pdf, .png, .jpg" required>
-                </div>
-                <button type="submit" class="btn primary full-width">Valider et soumettre</button>
-            </form>
+            <span class="tampon tampon--disponible talon__tampon">Disponible</span>
+          </article>
+          <p class="hero__legende">Chaque demande génère un talon de suivi unique, comme un reçu officiel.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- Ruban des actes -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Relevés de notes ✦ Attestations de réussite ✦ Diplômes &amp; duplicatas ✦ Certificats de scolarité ✦ Suivi par code unique ✦ Sans déplacement ✦&nbsp;</span>
+        <span>Relevés de notes ✦ Attestations de réussite ✦ Diplômes &amp; duplicatas ✦ Certificats de scolarité ✦ Suivi par code unique ✦ Sans déplacement ✦&nbsp;</span>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Article I : engagements -->
+    <section class="section cv" id="service">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="sec-head__no">Article I</span>
+          <h2>Un service public, trois engagements</h2>
+        </header>
+        <div class="piliers">
+          <article class="pilier" data-reveal>
+            <span class="pilier__no" aria-hidden="true">I</span>
+            <div>
+              <h3>Rapidité</h3>
+              <p>Dépôt en moins de trois minutes, délais de traitement annoncés dès la demande, retrait sans file&nbsp;: le guichet est ouvert 24&nbsp;h/24, week-ends et vacances compris.</p>
+              <p class="pilier__tag">Dépôt ≈ 3 min</p>
+            </div>
+          </article>
+          <article class="pilier" data-reveal>
+            <span class="pilier__no" aria-hidden="true">II</span>
+            <div>
+              <h3>Sécurité</h3>
+              <p>Pièces vérifiées par la scolarité, actes signés et authentifiés, code de suivi confidentiel remis uniquement au demandeur. Aucun intermédiaire, aucun frais caché.</p>
+              <p class="pilier__tag">Pièces vérifiées</p>
+            </div>
+          </article>
+          <article class="pilier" data-reveal>
+            <span class="pilier__no" aria-hidden="true">III</span>
+            <div>
+              <h3>Transparence</h3>
+              <p>Chaque étape est horodatée et consultable en ligne à tout moment&nbsp;: vous savez toujours où en est votre demande, sans appel téléphonique ni déplacement.</p>
+              <p class="pilier__tag">Historique horodaté</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Article II : fonctionnement -->
+    <section class="section cv" id="fonctionnement">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="sec-head__no">Article II</span>
+          <h2>Comment fonctionne le guichet</h2>
+        </header>
+        <ol class="marche" data-reveal-cascade>
+          <li>
+            <span class="marche__no" aria-hidden="true">01</span>
+            <h3>Déposez</h3>
+            <p>Remplissez le formulaire en ligne et joignez vos pièces justificatives. Un récapitulatif vous est présenté avant l'envoi.</p>
+            <p class="marche__tag">≈ 3 minutes</p>
+          </li>
+          <li>
+            <span class="marche__no" aria-hidden="true">02</span>
+            <h3>Suivez</h3>
+            <p>Recevez votre code unique de suivi et consultez l'avancement de votre dossier à tout moment, étape par étape.</p>
+            <p class="marche__tag">Code UP-2026-…</p>
+          </li>
+          <li>
+            <span class="marche__no" aria-hidden="true">03</span>
+            <h3>Récupérez</h3>
+            <p>Dès le statut «&nbsp;Disponible&nbsp;», présentez votre code au guichet de retrait ou téléchargez l'acte signé.</p>
+            <p class="marche__tag">Sans attente</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Article III : registre des actes -->
+    <section class="section cv" id="registre">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="sec-head__no">Article III</span>
+          <h2>Registre des actes délivrables</h2>
+          <p class="sec-head__lede">Les délais s'entendent en jours ouvrés, à compter de la validation des pièces.</p>
+        </header>
+        <div class="registre" data-reveal>
+          <table>
+            <caption class="visually-hidden">Actes académiques disponibles à la demande</caption>
+            <thead>
+              <tr><th scope="col">N°</th><th scope="col">Acte</th><th scope="col">Délai indicatif</th><th scope="col">Pièces principales</th><th scope="col"><span class="visually-hidden">Action</span></th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="mono">01</td><td><strong>Relevé de notes</strong></td><td class="mono">72 h</td><td>Pièce d'identité · Quittance d'inscription</td><td><a class="reg-link" href="nouvelle-demande.html?acte=releve">Demander<span aria-hidden="true"> →</span></a></td></tr>
+              <tr><td class="mono">02</td><td><strong>Attestation de réussite</strong></td><td class="mono">5 j ouvrés</td><td>Pièce d'identité · Dernier relevé</td><td><a class="reg-link" href="nouvelle-demande.html?acte=attestation">Demander<span aria-hidden="true"> →</span></a></td></tr>
+              <tr><td class="mono">03</td><td><strong>Diplôme / Duplicata</strong></td><td class="mono">15 j ouvrés</td><td>Pièce d'identité · Attestation de réussite</td><td><a class="reg-link" href="nouvelle-demande.html?acte=diplome">Demander<span aria-hidden="true"> →</span></a></td></tr>
+              <tr><td class="mono">04</td><td><strong>Certificat de scolarité</strong></td><td class="mono">24 h</td><td>Pièce d'identité</td><td><a class="reg-link" href="nouvelle-demande.html?acte=certificat">Demander<span aria-hidden="true"> →</span></a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chiffres clés -->
+    <section class="chiffres cv" aria-label="Chiffres clés du service">
+      <div class="wrap chiffres__grid">
+        <div class="chiffre" data-reveal><dd class="chiffre__n"><span data-count="1284">0</span></dd><dt>actes délivrés depuis janvier 2026</dt></div>
+        <div class="chiffre" data-reveal><dd class="chiffre__n"><span data-count="72" data-suffix=" h">0</span></dd><dt>délai moyen constaté</dt></div>
+        <div class="chiffre" data-reveal><dd class="chiffre__n"><span data-count="97" data-suffix=" %">0</span></dd><dt>de demandes abouties</dt></div>
+        <div class="chiffre" data-reveal><dd class="chiffre__n">24/7</dd><dt>guichet accessible en ligne</dt></div>
+      </div>
+    </section>
+
+    <!-- Article IV : transparence du traitement -->
+    <section class="section cv" id="transparence">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="sec-head__no">Article IV</span>
+          <h2>Le circuit officiel de votre demande</h2>
+        </header>
+        <div class="transp__grid">
+          <ol class="pipeline" data-reveal-cascade>
+            <li><span class="pipeline__pastille pipeline__pastille--deposee">1</span><strong>Déposée</strong><small>Jour J</small></li>
+            <li><span class="pipeline__pastille pipeline__pastille--instruction">2</span><strong>En instruction</strong><small>J+1</small></li>
+            <li><span class="pipeline__pastille pipeline__pastille--signature">3</span><strong>Signé</strong><small>J+2</small></li>
+            <li><span class="pipeline__pastille pipeline__pastille--disponible">4</span><strong>Disponible</strong><small>selon l'acte</small></li>
+          </ol>
+          <div class="panel" data-reveal>
+            <h3 class="panel__titre">Exemple d'historique horodaté</h3>
+            <ol class="chrono">
+              <li style="--stc:var(--st-dep)"><time>04/08/2026 à 09:12</time><strong>Déposée</strong><p>Déposée via le guichet numérique.</p></li>
+              <li style="--stc:var(--st-ins)"><time>04/08/2026 à 15:40</time><strong>En instruction</strong><p>Vérification des pièces et du parcours.</p></li>
+              <li style="--stc:var(--st-sig)"><time>07/08/2026 à 11:05</time><strong>Signé</strong><p>Signé par le service de la scolarité.</p></li>
+              <li class="is-current" style="--stc:var(--st-dis)"><time>08/08/2026 à 10:02</time><strong>Disponible</strong><p>Retrait au guichet 2, sur présentation du code.</p></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Communauté & assistance -->
+    <section class="section cv" id="communaute">
+      <div class="wrap communaute">
+        <div data-reveal>
+          <p class="overline">Canal communautaire</p>
+          <h2>Une question&nbsp;? Les étudiants vous répondent.</h2>
+          <p class="lead">Le canal WhatsApp officiel, animé par la scolarité et les délégués étudiants, répond à vos questions sous 24&nbsp;h ouvrées. Aucune demande d'acte n'y est traitée&nbsp;: passez toujours par le guichet.</p>
+          <a class="btn btn--wa" href="https://wa.me/2290197441234" rel="noopener" data-magnetic>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2 0 .4-.1.6l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.7-.8c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3Z"/></svg>
+            <span class="btn__label">Rejoindre le canal WhatsApp</span>
+          </a>
+          <p class="hero__note">Modération du lundi au vendredi, 8&nbsp;h – 18&nbsp;h.</p>
+        </div>
+        <aside class="talon talon--aide" data-tilt data-reveal>
+          <div class="talon__body">
+            <p class="talon__meta">Ticket d'assistance</p>
+            <strong class="talon__titre">Bureau des actes académiques</strong>
+            <dl class="talon__dl">
+              <div><dt>Courriel</dt><dd class="mono">actes.scolarite@univ-parakou.bj</dd></div>
+              <div><dt>Téléphone</dt><dd class="mono">+229 01 97 44 12 34</dd></div>
+              <div><dt>Retrait</dt><dd>Lun – Ven · 8 h – 16 h · Guichet 2</dd></div>
+            </dl>
+          </div>
+          <div class="talon__perf" aria-hidden="true"></div>
+          <div class="talon__stub">
+            <span class="talon__meta">Référence</span>
+            <strong class="talon__code">UP-AIDE</strong>
+            <div class="talon__bars" aria-hidden="true"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Avis officiel -->
+    <section class="wrap cv">
+      <div class="avis" data-reveal>
+        <span class="tampon tampon--or avis__tampon">Officiel</span>
+        <p><strong>Avis aux étudiants.</strong> La délivrance des actes est entièrement dématérialisée jusqu'au retrait. Aucun frais de dossier n'est exigé en ligne&nbsp;: méfiez-vous des intermédiaires et ne communiquez jamais votre code de suivi à un tiers.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pied de page -->
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div class="footer__brand">
+        <svg class="sceau footer__sceau" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M32 15l4.4 9.9 10.8 1.1-8.1 7.2 2.3 10.6L32 38.3l-9.4 5.5 2.3-10.6-8.1-7.2 10.8-1.1z" fill="currentColor"/>
+        </svg>
+        <p><strong>Université de Parakou</strong><br>Guichet numérique des actes académiques. Un service dématérialisé au bénéfice de l'ensemble des étudiants.</p>
+      </div>
+      <nav aria-label="Actes">
+        <h3>Les actes</h3>
+        <ul>
+          <li><a href="nouvelle-demande.html?acte=releve">Relevé de notes</a></li>
+          <li><a href="nouvelle-demande.html?acte=attestation">Attestation de réussite</a></li>
+          <li><a href="nouvelle-demande.html?acte=diplome">Diplôme / Duplicata</a></li>
+          <li><a href="nouvelle-demande.html?acte=certificat">Certificat de scolarité</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Accès">
+        <h3>Accès</h3>
+        <ul>
+          <li><a href="nouvelle-demande.html">Nouvelle demande</a></li>
+          <li><a href="suivi.html">Suivi d'une demande</a></li>
+          <li><a href="connexion.html">Connexion étudiante</a></li>
+          <li><a href="tableau-bord.html">Tableau de bord</a></li>
+          <li><a href="back-office.html">Espace agent</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h3>Contact</h3>
+        <ul class="footer__contact">
+          <li>Campus universitaire de Parakou<br>BP 123, Parakou — Bénin</li>
+          <li class="mono">actes.scolarite@univ-parakou.bj</li>
+          <li class="mono">+229 01 97 44 12 34</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer__base">
+      <span>© <span class="js-year">2026</span> Université de Parakou · Interface de démonstration — données fictives</span>
+      <span class="mono">v1.0 · UP-GAA</span>
+    </div>
+  </footer>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 </body>
 </html>

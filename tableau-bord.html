@@ -1,79 +1,132 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon espace — Portail des actes académiques</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tableau de bord — Guichet des actes académiques · Université de Parakou</title>
+  <meta name="description" content="Historique des demandes d'actes de l'étudiant connecté.">
+  <meta name="theme-color" content="#14213a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;0,9..144,750;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%2314213a'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='%23c99b3f' stroke-width='3'/%3E%3Cpath d='M32 18l3.6 8.2 9 .9-6.8 6 1.9 8.8L32 37.3l-7.7 4.6 1.9-8.8-6.8-6 9-.9z' fill='%23c99b3f'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <script src="js/app.js" defer></script>
+  <script src="js/motion.js" defer></script>
 </head>
-<body>
+<body data-page="tableau">
 
-<header class="site-header">
-  <div class="container">
-    <a href="index.html" class="brand">
-      <span class="brand__crest">UP</span>
-      <span class="brand__text"><strong>Portail des Actes</strong><span>Faculté — Université de Parakou</span></span>
-    </a>
-    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰ Menu</button>
-    <nav class="nav">
-      <a href="index.html">Accueil</a>
-      <a href="nouvelle-demande.html">Nouvelle demande</a>
-      <a href="suivi.html">Suivre une demande</a>
-      <a href="connexion.html">Espace étudiant</a>
-      <a href="back-office.html">Espace agent</a>
-    </nav>
-  </div>
-</header>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+  <div class="sentinelle" aria-hidden="true"></div>
+  <div class="flag" aria-hidden="true"><i></i><i></i><i></i></div>
 
-<div class="page-head">
-  <div class="container">
-    <span class="eyebrow">Mon espace</span>
-    <h1>Bonjour, Damien.</h1>
-    <p>Voici l'historique de toutes vos demandes d'actes académiques.</p>
-  </div>
-</div>
+  <header class="masthead">
+    <div class="wrap masthead__micro">
+      <span>République du Bénin · Ministère de l'Enseignement Supérieur</span>
+      <span class="masthead__micro-r">Année universitaire 2025–2026</span>
+    </div>
+    <div class="wrap masthead__bar">
+      <a class="brand" href="index.html">
+        <svg class="sceau" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="22.5" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"/>
+          <path d="M32 15l4.4 9.9 10.8 1.1-8.1 7.2 2.3 10.6L32 38.3l-9.4 5.5 2.3-10.6-8.1-7.2 10.8-1.1z" fill="currentColor"/>
+        </svg>
+        <span class="brand__txt"><strong>Université de Parakou</strong><small>Guichet numérique des actes académiques</small></span>
+      </a>
+      <nav class="nav" aria-label="Navigation principale">
+        <input type="checkbox" id="nav-toggle" class="nav__check">
+        <label for="nav-toggle" class="nav__burger">Menu</label>
+        <ul class="nav__list">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="nouvelle-demande.html">Nouvelle demande</a></li>
+          <li><a href="suivi.html">Suivi</a></li>
+          <li><a href="connexion.html">Connexion</a></li>
+          <li><a href="tableau-bord.html" class="is-here" aria-current="page">Tableau de bord</a></li>
+          <li><a href="back-office.html">Back-office</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<section class="section">
-  <div class="container dash-grid">
-
-    <aside class="dash-side">
-      <div class="who">
-        <div class="avatar">DK</div>
+  <main id="contenu">
+    <header class="page-head">
+      <div class="wrap dash-head">
         <div>
-          <strong style="display:block;">Damien K.</strong>
-          <span class="small">Matricule 20211045</span>
+          <p class="overline" data-reveal>Espace étudiant</p>
+          <h1 data-reveal>Vos demandes</h1>
+          <p class="lead" data-reveal>Bienvenue, <strong id="dash-nom">étudiant·e</strong>. Retrouvez ici l'ensemble de vos demandes et leur état d'avancement.</p>
         </div>
+        <!-- Carte étudiante : talon d'identité -->
+        <article class="talon talon--id" data-tilt data-reveal>
+          <div class="talon__body">
+            <p class="talon__meta">Carte étudiante · session de démonstration</p>
+            <div class="idcard">
+              <span class="idcard__ava" id="dash-ava" aria-hidden="true">…</span>
+              <div>
+                <strong class="talon__titre" id="dash-nom2">—</strong>
+                <dl class="talon__dl">
+                  <div><dt>Matricule</dt><dd class="mono" id="dash-matricule">—</dd></div>
+                  <div><dt>Parcours</dt><dd id="dash-filiere">—</dd></div>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <div class="talon__perf" aria-hidden="true"></div>
+          <div class="talon__stub">
+            <span class="talon__meta">Année</span>
+            <strong class="talon__code">2025–26</strong>
+            <div class="talon__bars" aria-hidden="true"></div>
+          </div>
+        </article>
       </div>
-      <ul class="dash-nav">
-        <li><a href="tableau-bord.html" class="active">Mes demandes</a></li>
-        <li><a href="nouvelle-demande.html">Nouvelle demande</a></li>
-        <li><a href="#">Mon profil</a></li>
-        <li><a href="index.html">Se déconnecter</a></li>
-      </ul>
-    </aside>
+    </header>
 
-    <div>
-      <div class="flex-between mt-32" style="margin-top:0;margin-bottom:20px;">
-        <h3 style="margin:0;">Mes demandes</h3>
-        <a href="nouvelle-demande.html" class="btn btn-primary btn-sm">+ Nouvelle demande</a>
+    <section class="section">
+      <div class="wrap">
+
+        <div class="dash-tools" data-reveal>
+          <div class="dash-tools__cta">
+            <a class="btn btn--gold" href="nouvelle-demande.html" data-magnetic><span class="btn__label">Nouvelle demande</span></a>
+            <button class="btn btn--ghost" type="button" id="btn-refresh">Actualiser</button>
+          </div>
+          <ul class="dash-chips" aria-label="Synthèse de vos demandes">
+            <li><b class="mono" id="chip-total">–</b> demandes</li>
+            <li class="st-dis"><b class="mono" id="chip-disponible">–</b> disponibles</li>
+            <li class="st-ins"><b class="mono" id="chip-instruction">–</b> en instruction</li>
+            <li class="st-dep"><b class="mono" id="chip-deposee">–</b> déposées</li>
+          </ul>
+        </div>
+
+        <!-- Repli statique visible sans JS -->
+        <div id="dash-nojs">
+          <p class="note">JavaScript est désactivé — aperçu statique de démonstration&nbsp;:</p>
+          <div class="registre">
+            <table>
+              <thead><tr><th>Code</th><th>Acte</th><th>Déposée le</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">UP-2026-AR-3988</td><td>Attestation de réussite</td><td class="mono">04/08/2026</td><td>Disponible</td></tr>
+                <tr><td class="mono">UP-2026-RN-4035</td><td>Relevé de notes</td><td class="mono">14/08/2026</td><td>En instruction</td></tr>
+                <tr><td class="mono">UP-2026-CS-7721</td><td>Certificat de scolarité</td><td class="mono">28/07/2026</td><td>Disponible</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Liste rendue par JS : talons perforés -->
+        <div id="dash-list" class="dash-list"></div>
       </div>
-      <div class="dash-list" id="dash-list"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__base">
+      <span>© <span class="js-year">2026</span> Université de Parakou · Interface de démonstration — données fictives</span>
+      <span class="mono">v1.0 · UP-GAA</span>
     </div>
+  </footer>
 
-  </div>
-</section>
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-bottom">
-      <span>© <span data-year></span> Faculté — Université de Parakou</span>
-      <span>Plateforme de démonstration — projet de dématérialisation</span>
-    </div>
-  </div>
-</footer>
-
-<script src="js/app.js"></script>
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 </body>
 </html>
