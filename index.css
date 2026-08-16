@@ -1,0 +1,292 @@
+--- src/index.css (原始)
+@import "tailwindcss";
+
+
++++ src/index.css (修改后)
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f3f6fb;
+  --card: #ffffff;
+  --cardsoft: #f8fafd;
+  --line: #e3e9f4;
+  --linestrong: #c9d6ea;
+  --ink: #0c1b3a;
+  --inksoft: #33456b;
+  --mut: #5d6f92;
+  --royal: #1a4fd6;
+  --royaldeep: #123ca8;
+  --royalsoft: #e7eefd;
+  --gold: #b98d1e;
+  --goldbright: #d4af37;
+  --goldsoft: #f7edd2;
+  --ok: #177a49;
+  --oksoft: #e1f3e9;
+  --warn: #a86a10;
+  --warnsoft: #fbefda;
+  --bad: #bb3a3a;
+  --badsoft: #fae6e6;
+  --info: #1a6fc2;
+  --infosoft: #e3effb;
+  --navy: #0a1428;
+  --navy2: #0f1d3a;
+  --navy3: #182a50;
+}
+
+.dark {
+  --bg: #0a1122;
+  --card: #111b33;
+  --cardsoft: #0e1730;
+  --line: #1f2e50;
+  --linestrong: #2d4270;
+  --ink: #eaf0fc;
+  --inksoft: #c3cfe8;
+  --mut: #8da0c4;
+  --royal: #5b84f0;
+  --royaldeep: #85a4f6;
+  --royalsoft: #1b2a52;
+  --gold: #e3c25e;
+  --goldbright: #efd37c;
+  --goldsoft: #322a14;
+  --ok: #43c184;
+  --oksoft: #12301f;
+  --warn: #e2a63d;
+  --warnsoft: #362a10;
+  --bad: #e47070;
+  --badsoft: #3a1919;
+  --info: #5fa8e8;
+  --infosoft: #122a41;
+  --navy: #0d1730;
+  --navy2: #122145;
+  --navy3: #1a2f5e;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-cardsoft: var(--cardsoft);
+  --color-line: var(--line);
+  --color-linestrong: var(--linestrong);
+  --color-ink: var(--ink);
+  --color-inksoft: var(--inksoft);
+  --color-mut: var(--mut);
+  --color-royal: var(--royal);
+  --color-royaldeep: var(--royaldeep);
+  --color-royalsoft: var(--royalsoft);
+  --color-gold: var(--gold);
+  --color-goldbright: var(--goldbright);
+  --color-goldsoft: var(--goldsoft);
+  --color-ok: var(--ok);
+  --color-oksoft: var(--oksoft);
+  --color-warn: var(--warn);
+  --color-warnsoft: var(--warnsoft);
+  --color-bad: var(--bad);
+  --color-badsoft: var(--badsoft);
+  --color-info: var(--info);
+  --color-infosoft: var(--infosoft);
+  --color-navy: var(--navy);
+  --color-navy2: var(--navy2);
+  --color-navy3: var(--navy3);
+  --font-display: "Space Grotesk", "Public Sans", ui-sans-serif, sans-serif;
+  --font-body: "Public Sans", "Segoe UI", ui-sans-serif, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--goldbright);
+  color: #0a1428;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--royal);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--linestrong);
+  border-radius: 8px;
+  border: 2px solid var(--bg);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--navy3);
+}
+
+/* ---------- textures & ambience ---------- */
+.blueprint {
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.hero-glow {
+  background: radial-gradient(560px 380px at 78% 18%, color-mix(in srgb, var(--royal) 16%, transparent), transparent 70%),
+    radial-gradient(420px 300px at 12% 82%, color-mix(in srgb, var(--goldbright) 12%, transparent), transparent 70%);
+}
+
+/* ---------- keyframes ---------- */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 46s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+.animate-floaty-slow {
+  animation: floaty 8.5s ease-in-out 1.2s infinite;
+}
+
+@keyframes pulsedot {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--royal) 45%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 9px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+.pulse-dot {
+  animation: pulsedot 2.2s ease-out infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(100deg, var(--cardsoft) 40%, color-mix(in srgb, var(--linestrong) 55%, var(--cardsoft)) 50%, var(--cardsoft) 60%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+  border-radius: 8px;
+}
+
+@keyframes drawline {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+.timeline-draw {
+  transform-origin: top;
+  animation: drawline 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 26s linear infinite;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+.animate-shake {
+  animation: shake 0.5s both;
+}
+
+/* line-mask title reveal */
+.mask-line {
+  display: block;
+  overflow: hidden;
+}
+.mask-line > span {
+  display: block;
+  transform: translateY(110%);
+  animation: lineup 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes lineup {
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* gold hairline under section labels */
+.eyebrow-rule::after {
+  content: "";
+  display: inline-block;
+  width: 2.4rem;
+  height: 1px;
+  margin-left: 0.75rem;
+  vertical-align: middle;
+  background: linear-gradient(90deg, var(--goldbright), transparent);
+}
+
+/* document paper */
+.paper {
+  background: #fdfdfb;
+  color: #16233f;
+  box-shadow: 0 24px 60px -18px rgb(10 20 40 / 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .animate-floaty,
+  .animate-floaty-slow,
+  .animate-spin-slow,
+  .pulse-dot {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .mask-line > span {
+    transform: none;
+    animation: none;
+  }
+}

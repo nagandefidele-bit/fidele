@@ -1,0 +1,11 @@
+--- public/robots.txt (原始)
+
+
++++ public/robots.txt (修改后)
+User-agent: *
+Allow: /
+Disallow: /student
+Disallow: /admin
+Disallow: /auth
+
+Sitemap: https://flash-actes.up.bj/sitemap.xml
